@@ -4,6 +4,4 @@ public enum TrafficLight {
 
     RED, AMBER, GREEN, OFF;
 
-
-
 }

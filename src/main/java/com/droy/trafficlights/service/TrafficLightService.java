@@ -1,6 +1,7 @@
 package com.droy.trafficlights.service;
 
 import com.droy.trafficlights.entity.TrafficLightStatusEntity;
+import com.droy.trafficlights.enumeration.TrafficLight;
 import com.droy.trafficlights.repository.TrafficLightStatusRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,6 +24,18 @@ public class TrafficLightService {
 
     public TrafficLightStatusEntity getTrafficLight(int id) {
         return trafficLightStatusRepository.getById(id);
+    }
+
+    public void updatetrafficLight(int id,
+                                   String user,
+                                   TrafficLight trafficLight,
+                                   String message
+                                   ) {
+        TrafficLightStatusEntity trafficLightStatusEntity = trafficLightStatusRepository.getById(id);
+        trafficLightStatusEntity.setUser(user);
+        trafficLightStatusEntity.setTrafficLight(trafficLight);
+        trafficLightStatusEntity.setMessage(message);
+        trafficLightStatusRepository.save(trafficLightStatusEntity);
     }
 
 }

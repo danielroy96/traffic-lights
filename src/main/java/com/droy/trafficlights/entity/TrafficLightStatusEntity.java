@@ -46,4 +46,20 @@ public class TrafficLightStatusEntity {
     public String getMessage() {
         return message;
     }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setUser(String user) {
+        this.user = user;
+    }
+
+    public void setTrafficLight(TrafficLight trafficLight) {
+        this.trafficLight = trafficLight;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
 }

@@ -1,4 +1,6 @@
+<#import "spring.ftl" as spring />
 <#import "light.ftl" as light>
+<@spring.bind "trafficLight" />
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,25 +15,25 @@
     <h2 class="mt-3 mb-3 text-center">Update traffic light</h2>
 </div>
 <div class="container">
-    <form>
+    <form action="/${trafficLight.id}/edit" method="post">
         <div class="form-group">
-            <label for="name">Name</label>
-            <input id="name" class="form-control" type="text" value="${trafficLight.user}">
+            <label for="user">Name</label>
+            <input id="user" name="user" class="form-control" type="text" value="${trafficLight.user}">
             <small>Your name as it will appear on your traffic light</small>
         </div>
         <div class="form-group">
             <label for="trafficLight">Traffic Light</label>
-            <select id="trafficLight" class="form-control">
-                <option value="GREEN">Green</option>
-                <option value="AMBER">Amber</option>
-                <option value="RED">Red</option>
-                <option value="OFF">Off (I'm away)</option>
+            <select id="trafficLight" name="trafficLight" class="form-control">
+                <option value="GREEN" <#if trafficLight.trafficLight == "GREEN">selected</#if>>Green</option>
+                <option value="AMBER" <#if trafficLight.trafficLight == "AMBER">selected</#if>>Amber</option>
+                <option value="RED" <#if trafficLight.trafficLight == "RED">selected</#if>>Red</option>
+                <option value="OFF" <#if trafficLight.trafficLight == "OFF">selected</#if>>Off (I'm away)</option>
             </select>
             <small>Your available capacity</small>
         </div>
         <div class="form-group">
             <label for="message">Message</label>
-            <input id="message" class="form-control" type="text" value="<#if trafficLight.message??>${trafficLight.message}</#if>">
+            <input id="message" name="message" class="form-control" type="text" value="<#if trafficLight.message??>${trafficLight.message}</#if>">
             <small>Leave more information for the rest of the team</small>
         </div>
         <div class="form-group">
