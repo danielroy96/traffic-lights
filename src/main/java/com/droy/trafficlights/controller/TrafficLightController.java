@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.view.RedirectView;
 
 @Controller
 public class TrafficLightController {
@@ -34,14 +35,14 @@ public class TrafficLightController {
     }
 
     @PostMapping("/{id}/edit")
-    public String trafficLightEditPost(@PathVariable int id,
-                                       @ModelAttribute("user") String user,
-                                       @ModelAttribute("trafficLight") String trafficLight,
-                                       @ModelAttribute("message") String message,
-                                       Model model) {
+    public RedirectView trafficLightEditPost(@PathVariable int id,
+                                             @ModelAttribute("user") String user,
+                                             @ModelAttribute("trafficLight") String trafficLight,
+                                             @ModelAttribute("message") String message,
+                                             Model model) {
         trafficLightService.updatetrafficLight(id, user, TrafficLight.valueOf(trafficLight), message);
         model.addAttribute("trafficLights", trafficLightService.getTrafficLights());
-        return "traffic-lights";
+        return new RedirectView("/");
     }
 
     @GetMapping("/add")
