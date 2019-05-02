@@ -1,0 +1,11 @@
+version: '3'
+services:
+  trafficlights:
+    image: com.droy/traffic-lights
+    ports:
+      - 8080:8080
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:mysql://fiv-droy:3306/trafficlights
+      - SPRING_DATASOURCE_USERNAME=traffic
+      - SPRING_DATASOURCE_PASSWORD=test
+      - SPRING_DATASOURCE_DRIVER_CLASS_NAME=com.mysql.jdbc.Driver
