@@ -37,6 +37,13 @@
             <small>Leave more information for the rest of the team</small>
         </div>
         <div class="form-group">
+            <label>Remote Working</label>
+            <div class="form-check">
+                <input id="workingFromHome" name="workingFromHome" class="form-check-input" type="checkbox" <#if trafficLight.workingFromHome>checked</#if>>
+                <label for="workingFromHome" class="form-check-label">I'm working from home</label>
+            </div>
+        </div>
+        <div class="form-group">
             <button type="submit" class="btn btn-primary">Save</button>
         </div>
     </form>

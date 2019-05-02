@@ -39,8 +39,13 @@ public class TrafficLightController {
                                              @ModelAttribute("user") String user,
                                              @ModelAttribute("trafficLight") String trafficLight,
                                              @ModelAttribute("message") String message,
+                                             @ModelAttribute("workingFromHome") String workingFromHome,
                                              Model model) {
-        trafficLightService.updatetrafficLight(id, user, TrafficLight.valueOf(trafficLight), message);
+        boolean workingFromHomeBoolean = false;
+        if (workingFromHome.equals("on")) {
+          workingFromHomeBoolean = true;
+        }
+        trafficLightService.updatetrafficLight(id, user, TrafficLight.valueOf(trafficLight), message, workingFromHomeBoolean);
         model.addAttribute("trafficLights", trafficLightService.getTrafficLights());
         return new RedirectView("/");
     }

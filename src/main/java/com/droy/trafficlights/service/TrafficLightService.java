@@ -29,12 +29,14 @@ public class TrafficLightService {
     public void updatetrafficLight(int id,
                                    String user,
                                    TrafficLight trafficLight,
-                                   String message
+                                   String message,
+                                   boolean workingFromHome
                                    ) {
         TrafficLightStatusEntity trafficLightStatusEntity = trafficLightStatusRepository.getById(id);
         trafficLightStatusEntity.setUser(user);
         trafficLightStatusEntity.setTrafficLight(trafficLight);
         trafficLightStatusEntity.setMessage(message);
+        trafficLightStatusEntity.setWorkingFromHome(workingFromHome);
         trafficLightStatusRepository.save(trafficLightStatusEntity);
     }
 

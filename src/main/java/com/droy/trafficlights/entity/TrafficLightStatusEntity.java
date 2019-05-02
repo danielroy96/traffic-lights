@@ -22,10 +22,14 @@ public class TrafficLightStatusEntity {
     @Column(name = "message")
     private String message;
 
-    public TrafficLightStatusEntity(String user, TrafficLight trafficLight, String message) {
+    @Column(name = "workingfromhome")
+    private boolean workingFromHome;
+
+    public TrafficLightStatusEntity(String user, TrafficLight trafficLight, String message, boolean workingFromHome) {
         this.user = user;
         this.trafficLight = trafficLight;
         this.message = message;
+        this.workingFromHome = workingFromHome;
     }
 
     public TrafficLightStatusEntity() {
@@ -47,6 +51,10 @@ public class TrafficLightStatusEntity {
         return message;
     }
 
+    public boolean isWorkingFromHome() {
+        return workingFromHome;
+    }
+
     public void setId(int id) {
         this.id = id;
     }
@@ -62,4 +70,9 @@ public class TrafficLightStatusEntity {
     public void setMessage(String message) {
         this.message = message;
     }
+
+    public void setWorkingFromHome(boolean workingFromHome) {
+        this.workingFromHome = workingFromHome;
+    }
+
 }

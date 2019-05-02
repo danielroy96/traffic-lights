@@ -7,6 +7,8 @@
   <title>Traffic Light</title>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+        integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
   <link href="/css/style.css" rel="stylesheet">
 </head>
 <body>
@@ -22,7 +24,7 @@
             <h5 class="my-0 font-weight-normal">{{trafficLight.user}}</h5>
           </div>
           <a v-bind:href="'/' + trafficLight.id + '/edit'">
-            <div class="float-right border rounded-circle traffic-light bg-danger"
+            <div class="float-right border rounded-circle bg-danger"
                  v-if="trafficLight.trafficLight === 'RED'"></div>
             <div class="float-right border rounded-circle traffic-light bg-warning"
                  v-if="trafficLight.trafficLight === 'AMBER'"></div>
@@ -31,6 +33,7 @@
             <div class="float-right border rounded-circle traffic-light"
                  v-if="trafficLight.trafficLight === 'OFF'"></div>
           </a>
+          <div class="float-right working-from-home fas fa-home" v-if="trafficLight.workingFromHome == true"></div>
         </div>
         <div class="card-body">
           <p>{{trafficLight.message}}</p>
