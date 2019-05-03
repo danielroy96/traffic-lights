@@ -12,19 +12,16 @@
   <link href="/css/style.css" rel="stylesheet">
 </head>
 <body>
-<div class="container">
-  <h2 class="mt-3 mb-3 text-center">Team Traffic Light Status</h2>
-</div>
-<div class="container">
+<div class="traffic-light-container">
   <div class="row" id="trafficLights">
     <div class="col-sm-3" v-for="trafficLight in trafficLights">
       <div class="card mb-4 shadow-sm">
         <div class="card-header">
           <div class="float-left">
-            <h5 class="my-0 font-weight-normal">{{trafficLight.user}}</h5>
+            <h2 class="my-0 font-weight-normal">{{trafficLight.user}}</h2>
           </div>
           <a v-bind:href="'/' + trafficLight.id + '/edit'">
-            <div class="float-right border rounded-circle bg-danger"
+            <div class="float-right border rounded-circle traffic-light bg-danger"
                  v-if="trafficLight.trafficLight === 'RED'"></div>
             <div class="float-right border rounded-circle traffic-light bg-warning"
                  v-if="trafficLight.trafficLight === 'AMBER'"></div>
@@ -36,7 +33,7 @@
           <div class="float-right working-from-home fas fa-home" v-if="trafficLight.workingFromHome == true"></div>
         </div>
         <div class="card-body">
-          <p>{{trafficLight.message}}</p>
+          <p class="message">{{trafficLight.message}}</p>
         </div>
       </div>
     </div>
