@@ -20,3 +20,8 @@
 .user {
     color: inherit;
 }
+
+.add-traffic-light {
+    font-size: 2rem;
+    color: gray;
+}

@@ -40,6 +40,15 @@
         </div>
       </div>
     </div>
+    <div class="col-sm-3">
+      <div class="card mb-4 shadow-sm">
+        <a href="/create">
+          <div class="card-body">
+            <div class="align-middle text-center"><i class="fas fa-user-plus add-traffic-light"></i></div>
+          </div>
+        </a>
+      </div>
+    </div>
   </div>
 </div>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"

@@ -12,10 +12,10 @@
 </head>
 <body>
 <div class="container">
-    <h2 class="mt-3 mb-3 text-center">Update traffic light</h2>
+    <h2 class="mt-3 mb-3 text-center"><#if (trafficLight.id > 0)>Update<#else>Create</#if> traffic light</h2>
 </div>
 <div class="container">
-    <form action="/${trafficLight.id}/edit" method="post">
+    <form>
         <div class="form-group">
             <label for="user">Name</label>
             <input id="user" name="user" class="form-control" type="text" value="${trafficLight.user}">
@@ -44,8 +44,13 @@
             </div>
         </div>
         <div class="form-group">
-            <button type="submit" class="btn btn-primary">Save</button>
-            <button type="submit" class="btn btn-secondary btn-delete float-right" formaction="/${trafficLight.id}/delete">Delete</button>
+            <#if (trafficLight.id > 0)>
+                <button type="submit" class="btn btn-primary" formaction="/${trafficLight.id}/edit" formmethod="post">Save</button>
+                <button type="submit" class="btn btn-danger btn-delete float-right" formaction="/${trafficLight.id}/delete" formmethod="post">Delete</button>
+            <#else>
+                <button type="submit" class="btn btn-primary" formaction="/create" formmethod="post">Create</button>
+            </#if>
+            <button type="submit" class="btn btn-light" formaction="/" formmethod="get">Cancel</button>
         </div>
     </form>
 </div>

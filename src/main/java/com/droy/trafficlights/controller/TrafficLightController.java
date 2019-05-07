@@ -1,5 +1,6 @@
 package com.droy.trafficlights.controller;
 
+import com.droy.trafficlights.entity.TrafficLightStatusEntity;
 import com.droy.trafficlights.enumeration.TrafficLight;
 import com.droy.trafficlights.service.TrafficLightService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.view.RedirectView;
+
+import java.util.Date;
 
 @Controller
 public class TrafficLightController {
@@ -43,9 +46,15 @@ public class TrafficLightController {
                                              Model model) {
         boolean workingFromHomeBoolean = false;
         if (workingFromHome.equals("on")) {
-          workingFromHomeBoolean = true;
+            workingFromHomeBoolean = true;
         }
-        trafficLightService.updatetrafficLight(id, user, TrafficLight.valueOf(trafficLight), message, workingFromHomeBoolean);
+        trafficLightService.updatetrafficLight(
+                id,
+                user,
+                TrafficLight.valueOf(trafficLight),
+                message,
+                workingFromHomeBoolean
+        );
         model.addAttribute("trafficLights", trafficLightService.getTrafficLights());
         return new RedirectView("/");
     }
@@ -56,9 +65,34 @@ public class TrafficLightController {
         return new RedirectView("/");
     }
 
-    @GetMapping("/add")
-    public String trafficLightAdd(Model model) {
+    @GetMapping("/create")
+    public String trafficLightCreate(Model model) {
+        model.addAttribute("trafficLight", new TrafficLightStatusEntity(
+                "",
+                TrafficLight.GREEN,
+                "",
+                false,
+                new Date()));
         return "edit-traffic-light";
+    }
+
+    @PostMapping("/create")
+    public RedirectView trafficLightCreatePost(@ModelAttribute("user") String user,
+                                               @ModelAttribute("trafficLight") String trafficLight,
+                                               @ModelAttribute("message") String message,
+                                               @ModelAttribute("workingFromHome") String workingFromHome,
+                                               Model model) {
+        boolean workingFromHomeBoolean = false;
+        if (workingFromHome.equals("on")) {
+            workingFromHomeBoolean = true;
+        }
+        trafficLightService.createTrafficLight(
+                user,
+                TrafficLight.valueOf(trafficLight),
+                message,
+                workingFromHomeBoolean
+        );
+        return new RedirectView("/");
     }
 
 }

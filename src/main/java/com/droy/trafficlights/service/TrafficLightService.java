@@ -47,4 +47,18 @@ public class TrafficLightService {
         trafficLightStatusRepository.delete(trafficLightStatusEntity);
     }
 
+    public void createTrafficLight(String user,
+                                   TrafficLight trafficLight,
+                                   String message,
+                                   boolean workingFromHome) {
+        TrafficLightStatusEntity trafficLightStatusEntity = new TrafficLightStatusEntity(
+                user,
+                trafficLight,
+                message,
+                workingFromHome,
+                new Date()
+        );
+        trafficLightStatusRepository.save(trafficLightStatusEntity);
+    }
+
 }
