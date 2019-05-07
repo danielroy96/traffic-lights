@@ -18,7 +18,7 @@
       <div class="card mb-4 shadow-sm">
         <div class="card-header">
           <div class="float-left">
-            <h2 class="my-0 font-weight-normal">{{trafficLight.user}}</h2>
+            <h3 class="my-0 font-weight-normal">{{trafficLight.user}}</h3>
           </div>
           <a v-bind:href="'/' + trafficLight.id + '/edit'">
             <div class="float-right border rounded-circle traffic-light bg-danger"
