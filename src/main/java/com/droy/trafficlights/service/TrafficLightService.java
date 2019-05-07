@@ -42,4 +42,9 @@ public class TrafficLightService {
         trafficLightStatusRepository.save(trafficLightStatusEntity);
     }
 
+    public void deleteTrafficLight(int id) {
+        TrafficLightStatusEntity trafficLightStatusEntity = trafficLightStatusRepository.getById(id);
+        trafficLightStatusRepository.delete(trafficLightStatusEntity);
+    }
+
 }

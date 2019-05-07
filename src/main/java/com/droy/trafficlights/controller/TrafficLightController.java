@@ -50,6 +50,12 @@ public class TrafficLightController {
         return new RedirectView("/");
     }
 
+    @PostMapping("/{id}/delete")
+    public RedirectView trafficLightDeletePost(@PathVariable int id) {
+        trafficLightService.deleteTrafficLight(id);
+        return new RedirectView("/");
+    }
+
     @GetMapping("/add")
     public String trafficLightAdd(Model model) {
         return "edit-traffic-light";
