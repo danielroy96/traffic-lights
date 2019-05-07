@@ -45,7 +45,7 @@
         </div>
         <div class="form-group">
             <button type="submit" class="btn btn-primary">Save</button>
-            <button type="submit" class="btn btn-secondary btn-delete" formaction="/${trafficLight.id}/delete">Delete</button>
+            <button type="submit" class="btn btn-secondary btn-delete float-right" formaction="/${trafficLight.id}/delete">Delete</button>
         </div>
     </form>
 </div>
