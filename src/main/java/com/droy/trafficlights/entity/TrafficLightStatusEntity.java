@@ -3,6 +3,7 @@ package com.droy.trafficlights.entity;
 import com.droy.trafficlights.enumeration.TrafficLight;
 
 import javax.persistence.*;
+import java.util.Date;
 
 @Entity
 @Table(name = "trafficlightstatus")
@@ -25,11 +26,19 @@ public class TrafficLightStatusEntity {
     @Column(name = "workingfromhome")
     private boolean workingFromHome;
 
-    public TrafficLightStatusEntity(String user, TrafficLight trafficLight, String message, boolean workingFromHome) {
+    @Column(name = "lastupdated")
+    private Date lastUpdated;
+
+    public TrafficLightStatusEntity(String user,
+                                    TrafficLight trafficLight,
+                                    String message,
+                                    boolean workingFromHome,
+                                    Date lastUpdated) {
         this.user = user;
         this.trafficLight = trafficLight;
         this.message = message;
         this.workingFromHome = workingFromHome;
+        this.lastUpdated = lastUpdated;
     }
 
     public TrafficLightStatusEntity() {
@@ -59,6 +68,10 @@ public class TrafficLightStatusEntity {
         this.id = id;
     }
 
+    public Date getLastUpdated() {
+        return lastUpdated;
+    }
+
     public void setUser(String user) {
         this.user = user;
     }
@@ -75,4 +88,7 @@ public class TrafficLightStatusEntity {
         this.workingFromHome = workingFromHome;
     }
 
+    public void setLastUpdated(Date lastUpdated) {
+        this.lastUpdated = lastUpdated;
+    }
 }

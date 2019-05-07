@@ -9,7 +9,7 @@ import java.util.List;
 @Repository
 public interface TrafficLightStatusRepository extends CrudRepository<TrafficLightStatusEntity, Long> {
 
-    public List<TrafficLightStatusEntity> getAllByIdGreaterThan(int i);
+    public List<TrafficLightStatusEntity> getAllByIdGreaterThanOrderByLastUpdatedDesc(int i);
 
     public TrafficLightStatusEntity getById(int i);
 

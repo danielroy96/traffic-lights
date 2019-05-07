@@ -17,10 +17,12 @@
     <div class="col-sm-3" v-for="trafficLight in trafficLights">
       <div class="card mb-4 shadow-sm">
         <div class="card-header">
-          <div class="float-left">
-            <h3 class="my-0 font-weight-normal">{{trafficLight.user}}</h3>
-          </div>
-          <a v-bind:href="'/' + trafficLight.id + '/edit'">
+          <a v-bind:href="'/' + trafficLight.id + '/edit'" class="user">
+            <div class="float-left">
+              <h3 class="my-0 font-weight-normal" data-toggle="tooltip" data-placement="bottom"
+                  v-bind:title="'Last updated ' + moment(trafficLight.lastUpdated).format('HH:mm DD/MM/YY')">
+                {{trafficLight.user}}</h3>
+            </div>
             <div class="float-right border rounded-circle traffic-light bg-danger"
                  v-if="trafficLight.trafficLight === 'RED'"></div>
             <div class="float-right border rounded-circle traffic-light bg-warning"
@@ -30,7 +32,8 @@
             <div class="float-right border rounded-circle traffic-light"
                  v-if="trafficLight.trafficLight === 'OFF'"></div>
           </a>
-          <div class="float-right working-from-home fas fa-home" v-if="trafficLight.workingFromHome == true"></div>
+          <div class="float-right working-from-home fas fa-home"
+               v-if="trafficLight.workingFromHome == true"></div>
         </div>
         <div class="card-body">
           <p class="message">{{trafficLight.message}}</p>
@@ -48,35 +51,38 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script>
-  var app = new Vue({
-    el: '#trafficLights',
-    data: {
-      message: 'Hello Vue!',
-      trafficLights: [],
-    },
-    methods: {
-      getData() {
-        axios
-          .get('/rest/traffic-lights')
-          .then(response => (this.trafficLights = response.data));
-      },
-      pollData() {
-        this.polling = setInterval(() => {
-          this.getData()
-        }, 3000);
-      }
-    },
-    beforeDestroy() {
-      clearInterval(this.polling)
-    },
-    mounted() {
-      this.getData();
-      this.pollData();
-    },
-  })
+    var app = new Vue({
+        el: '#trafficLights',
+        data: {
+            message: 'Hello Vue!',
+            trafficLights: [],
+            moment: moment,
+        },
+        methods: {
+            getData() {
+                axios
+                    .get('/rest/traffic-lights')
+                    .then(response => (this.trafficLights = response.data));
+                $('[data-toggle="tooltip"]').tooltip();
+            },
+            pollData() {
+                this.polling = setInterval(() => {
+                    this.getData()
+                }, 3000);
+            }
+        },
+        beforeDestroy() {
+            clearInterval(this.polling)
+        },
+        mounted() {
+            this.getData();
+            this.pollData();
+        },
+    })
 </script>
 </body>
 </html>

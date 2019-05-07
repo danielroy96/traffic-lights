@@ -6,6 +6,7 @@ import com.droy.trafficlights.repository.TrafficLightStatusRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -19,7 +20,7 @@ public class TrafficLightService {
     }
 
     public List<TrafficLightStatusEntity> getTrafficLights() {
-        return trafficLightStatusRepository.getAllByIdGreaterThan(0);
+        return trafficLightStatusRepository.getAllByIdGreaterThanOrderByLastUpdatedDesc(0);
     }
 
     public TrafficLightStatusEntity getTrafficLight(int id) {
@@ -37,6 +38,7 @@ public class TrafficLightService {
         trafficLightStatusEntity.setTrafficLight(trafficLight);
         trafficLightStatusEntity.setMessage(message);
         trafficLightStatusEntity.setWorkingFromHome(workingFromHome);
+        trafficLightStatusEntity.setLastUpdated(new Date());
         trafficLightStatusRepository.save(trafficLightStatusEntity);
     }
 
