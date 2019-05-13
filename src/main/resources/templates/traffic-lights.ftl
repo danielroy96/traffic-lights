@@ -32,8 +32,13 @@
             <div class="float-right border rounded-circle traffic-light"
                  v-if="trafficLight.trafficLight === 'OFF'"></div>
           </a>
-          <div class="float-right working-from-home fas fa-home"
-               v-if="trafficLight.workingFromHome == true"></div>
+          <div class="float-right additional-icon fas fa-home"
+               v-if="trafficLight.workingFromHome == true" data-toggle="tooltip" data-placement="bottom"
+               title="This person is working remotely"></div>
+          <div class="float-right additional-icon fas fa-times"
+               v-if="new Date(trafficLight.lastUpdated).setHours(0,0,0,0) < new Date().setHours(0,0,0,0)"
+               data-toggle="tooltip" data-placement="bottom"
+               title="This person has not updated their traffic light today"></div>
         </div>
         <div class="card-body">
           <p class="message">{{trafficLight.message}}</p>
@@ -64,34 +69,34 @@
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script>
-    var app = new Vue({
-        el: '#trafficLights',
-        data: {
-            message: 'Hello Vue!',
-            trafficLights: [],
-            moment: moment,
-        },
-        methods: {
-            getData() {
-                axios
-                    .get('/rest/traffic-lights')
-                    .then(response => (this.trafficLights = response.data));
-                $('[data-toggle="tooltip"]').tooltip();
-            },
-            pollData() {
-                this.polling = setInterval(() => {
-                    this.getData()
-                }, 3000);
-            }
-        },
-        beforeDestroy() {
-            clearInterval(this.polling)
-        },
-        mounted() {
-            this.getData();
-            this.pollData();
-        },
-    })
+  var app = new Vue({
+    el: '#trafficLights',
+    data: {
+      message: 'Hello Vue!',
+      trafficLights: [],
+      moment: moment,
+    },
+    methods: {
+      getData() {
+        axios
+          .get('/rest/traffic-lights')
+          .then(response => (this.trafficLights = response.data));
+        $('[data-toggle="tooltip"]').tooltip();
+      },
+      pollData() {
+        this.polling = setInterval(() => {
+          this.getData()
+        }, 3000);
+      }
+    },
+    beforeDestroy() {
+      clearInterval(this.polling)
+    },
+    mounted() {
+      this.getData();
+      this.pollData();
+    },
+  })
 </script>
 </body>
 </html>
