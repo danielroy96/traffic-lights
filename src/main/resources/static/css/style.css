@@ -1,3 +1,9 @@
+#trafficLights {
+    min-height: 100vh;
+    min-width: 100vh;
+    padding-bottom: 5vh;
+}
+
 .traffic-light {
     width: 2rem;
     height: 2rem;
@@ -21,7 +27,52 @@
     color: inherit;
 }
 
+.user:hover {
+    color: inherit;
+}
+
 .add-traffic-light {
     font-size: 2rem;
     color: gray;
+}
+
+.dark-mode-toggler {
+    color: gray;
+}
+
+/*
+    Dark mode styles
+ */
+
+.body-dark {
+    background-color: #333;
+    color: #FFF;
+}
+
+.card-dark {
+    border: none;
+}
+
+.card-header-dark {
+    background-color: #444;
+    color: #FFF;
+}
+
+.card-body-dark {
+    background-color: #222;
+    color: #AAA;
+}
+
+.additional-icon-dark {
+    color: #FFF;
+}
+
+.input-dark {
+    background-color: #232323;
+    color: #FFF;
+}
+
+.input-dark:focus {
+    background-color: #232323;
+    color: #FFF;
 }

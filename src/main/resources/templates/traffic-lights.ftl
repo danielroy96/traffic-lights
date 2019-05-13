@@ -12,11 +12,11 @@
   <link href="/css/style.css" rel="stylesheet">
 </head>
 <body>
-<div class="traffic-light-container">
-  <div class="row" id="trafficLights">
+<div class="traffic-light-container" id="trafficLights" v-bind:class="[darkMode ? 'body-dark':'']">
+  <div class="row">
     <div class="col-sm-3" v-for="trafficLight in trafficLights">
-      <div class="card mb-4 shadow-sm">
-        <div class="card-header">
+      <div class="card mb-4 shadow-sm" v-bind:class="[darkMode ? 'card-dark':'']">
+        <div class="card-header" v-bind:class="[darkMode ? 'card-header-dark':'']">
           <a v-bind:href="'/' + trafficLight.id + '/edit'" class="user">
             <div class="float-left">
               <h3 class="my-0 font-weight-normal" data-toggle="tooltip" data-placement="bottom"
@@ -34,26 +34,32 @@
           </a>
           <div class="float-right additional-icon fas fa-home"
                v-if="trafficLight.workingFromHome == true" data-toggle="tooltip" data-placement="bottom"
-               title="This person is working remotely"></div>
+               title="This person is working remotely" v-bind:class="[darkMode ? 'additional-icon-dark':'']"></div>
           <div class="float-right additional-icon fas fa-times"
                v-if="(new Date(trafficLight.lastUpdated).setHours(0,0,0,0) < new Date().setHours(0,0,0,0)) && trafficLight.trafficLight != 'OFF'"
                data-toggle="tooltip" data-placement="bottom"
-               title="This person has not updated their traffic light today"></div>
+               title="This person has not updated their traffic light today"
+               v-bind:class="[darkMode ? 'additional-icon-dark':'']"></div>
         </div>
-        <div class="card-body">
+        <div class="card-body" v-bind:class="[darkMode ? 'card-body-dark':'']">
           <p class="message">{{trafficLight.message}}</p>
         </div>
       </div>
     </div>
     <div class="col-sm-3">
-      <div class="card mb-4 shadow-sm">
+      <div class="card mb-4 shadow-sm" v-bind:class="[darkMode ? 'card-dark':'']">
         <a href="/create">
-          <div class="card-body">
-            <div class="align-middle text-center"><i class="fas fa-user-plus add-traffic-light"></i></div>
+          <div class="card-body" v-bind:class="[darkMode ? 'card-body-dark':'']">
+            <div class="align-middle text-center" v-bind:class="[darkMode ? 'additional-icon-dark':'']">
+              <i class="fas fa-user-plus add-traffic-light" v-bind:class="[darkMode ? 'additional-icon-dark':'']"></i>
+            </div>
           </div>
         </a>
       </div>
     </div>
+  </div>
+  <div class="row float-right">
+    <button @click.stop.prevent="toggleDarkMode" class="fas fa-adjust btn dark-mode-toggler"></button>
   </div>
 </div>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
@@ -66,37 +72,44 @@
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script>
-  var app = new Vue({
-    el: '#trafficLights',
-    data: {
-      message: 'Hello Vue!',
-      trafficLights: [],
-      moment: moment,
-    },
-    methods: {
-      getData() {
-        axios
-          .get('/rest/traffic-lights')
-          .then(response => (this.trafficLights = response.data));
-        $('[data-toggle="tooltip"]').tooltip();
-      },
-      pollData() {
-        this.polling = setInterval(() => {
-          this.getData()
-        }, 3000);
-      }
-    },
-    beforeDestroy() {
-      clearInterval(this.polling)
-    },
-    mounted() {
-      this.getData();
-      this.pollData();
-    },
-  })
+    var app = new Vue({
+        el: '#trafficLights',
+        data: {
+            trafficLights: [],
+            darkMode: false,
+            moment: moment,
+            cookies: Cookies,
+        },
+        methods: {
+            toggleDarkMode: function () {
+                this.darkMode = !this.darkMode;
+                Cookies.set('darkMode', this.darkMode);
+            },
+            getData: function () {
+                axios
+                    .get('/rest/traffic-lights')
+                    .then(response => (this.trafficLights = response.data));
+                $('[data-toggle="tooltip"]').tooltip();
+            },
+            pollData: function () {
+                this.polling = setInterval(() => {
+                    this.getData()
+                }, 3000);
+            },
+        },
+        beforeDestroy() {
+            clearInterval(this.polling)
+        },
+        mounted() {
+            this.getData();
+            this.pollData();
+            this.darkMode = Cookies.get('darkMode') === "true";
+        },
+    })
 </script>
 </body>
 </html>
