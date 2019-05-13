@@ -36,7 +36,7 @@
                v-if="trafficLight.workingFromHome == true" data-toggle="tooltip" data-placement="bottom"
                title="This person is working remotely"></div>
           <div class="float-right additional-icon fas fa-times"
-               v-if="new Date(trafficLight.lastUpdated).setHours(0,0,0,0) < new Date().setHours(0,0,0,0)"
+               v-if="(new Date(trafficLight.lastUpdated).setHours(0,0,0,0) < new Date().setHours(0,0,0,0)) && trafficLight.trafficLight != 'OFF'"
                data-toggle="tooltip" data-placement="bottom"
                title="This person has not updated their traffic light today"></div>
         </div>
