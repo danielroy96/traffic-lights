@@ -9,11 +9,18 @@
   <title>Traffic Light</title>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+        integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
   <link href="/css/style.css" rel="stylesheet">
 </head>
 <body>
 <div class="traffic-light-container" id="trafficLights" v-bind:class="[darkMode ? 'body-dark':'']">
   <div class="container">
+    <form>
+      <button type="submit" class="btn btn-danger btn-delete float-right" formaction="/${trafficLight.id}/delete"
+              formmethod="post"><i class="fa fa-trash">&nbsp;</i>Delete
+      </button>
+    </form>
     <h2 class="mt-3 mb-3 text-center"><#if (trafficLight.id > 0)>Update<#else>Create</#if> traffic light</h2>
   </div>
   <div class="container">
@@ -50,16 +57,16 @@
         </div>
       </div>
       <div class="form-group">
-        <#if (trafficLight.id > 0)>
-          <button type="submit" class="btn btn-primary" formaction="/${trafficLight.id}/edit" formmethod="post">Save
-          </button>
-          <button type="submit" class="btn btn-danger btn-delete float-right" formaction="/${trafficLight.id}/delete"
-                  formmethod="post">Delete
-          </button>
-        <#else>
-          <button type="submit" class="btn btn-primary" formaction="/create" formmethod="post">Create</button>
-        </#if>
-        <button type="submit" class="btn btn-light" formaction="/" formmethod="get">Cancel</button>
+          <#if (trafficLight.id > 0)>
+            <button type="submit" class="btn btn-primary" formaction="/${trafficLight.id}/edit" formmethod="post"><i
+                class="fa fa-check">&nbsp;</i>Save
+            </button>
+          <#else>
+            <button type="submit" class="btn btn-primary" formaction="/create" formmethod="post"><i class="fa fa-check">&nbsp;</i>Create
+            </button>
+          </#if>
+        <button type="submit" class="btn btn-light" formaction="/" formmethod="get"><i class="fa fa-times">&nbsp;</i>Cancel
+        </button>
       </div>
     </form>
   </div>
@@ -76,16 +83,16 @@
 <script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 <script>
-    var app = new Vue({
-        el: '#trafficLights',
-        data: {
-            darkMode: false,
-            cookies: Cookies,
-        },
-        mounted() {
-            this.darkMode = Cookies.get('darkMode') === "true";
-        },
-    })
+  var app = new Vue({
+    el: '#trafficLights',
+    data: {
+      darkMode: false,
+      cookies: Cookies,
+    },
+    mounted() {
+      this.darkMode = Cookies.get('darkMode') === "true";
+    },
+  })
 </script>
 </body>
 </html>
