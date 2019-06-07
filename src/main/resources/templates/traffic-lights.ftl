@@ -19,18 +19,18 @@
         <div class="card-header" v-bind:class="[darkMode ? 'card-header-dark':'']">
           <a v-bind:href="'/' + trafficLight.id + '/edit'" class="user">
             <div class="float-left">
-              <h3 class="my-0 font-weight-normal" data-toggle="tooltip" data-placement="bottom"
-                  v-bind:title="'Last updated ' + moment(trafficLight.lastUpdated).format('HH:mm DD/MM/YY')">
-                {{trafficLight.user}}</h3>
             </div>
-            <div class="float-right border rounded-circle traffic-light bg-danger"
+            <div class="float-left border rounded-circle traffic-light bg-danger"
                  v-if="trafficLight.trafficLight === 'RED'"></div>
-            <div class="float-right border rounded-circle traffic-light bg-warning"
+            <div class="float-left border rounded-circle traffic-light bg-warning"
                  v-if="trafficLight.trafficLight === 'AMBER'"></div>
-            <div class="float-right border rounded-circle traffic-light bg-success"
+            <div class="float-left border rounded-circle traffic-light bg-success"
                  v-if="trafficLight.trafficLight === 'GREEN'"></div>
-            <div class="float-right border rounded-circle traffic-light"
+            <div class="float-left border rounded-circle traffic-light"
                  v-if="trafficLight.trafficLight === 'OFF'"></div>
+            <h3 class="float-left font-weight-normal ml-md-3" data-toggle="tooltip" data-placement="bottom"
+                v-bind:title="'Last updated ' + moment(trafficLight.lastUpdated).format('HH:mm DD/MM/YY')">
+              {{trafficLight.user}}</h3>
           </a>
           <div class="float-right additional-icon fas fa-home"
                v-if="trafficLight.workingFromHome == true" data-toggle="tooltip" data-placement="bottom"
@@ -41,7 +41,7 @@
                title="This person has not updated their traffic light today"
                v-bind:class="[darkMode ? 'additional-icon-dark':'']"></div>
         </div>
-        <div class="card-body" v-bind:class="[darkMode ? 'card-body-dark':'']">
+        <div class="card-body" v-if="!messageHidden" v-bind:class="[darkMode ? 'card-body-dark':'']">
           <p class="message">{{trafficLight.message}}</p>
         </div>
       </div>
@@ -59,7 +59,8 @@
     </div>
   </div>
   <div class="row float-right">
-    <button @click.stop.prevent="toggleDarkMode" class="fas fa-adjust btn dark-mode-toggler"></button>
+    <button @click.stop.prevent="toggleMessageHidden" class="far fa-comment-dots btn mode-toggler"></button>
+    <button @click.stop.prevent="toggleDarkMode" class="fas fa-adjust btn mode-toggler"></button>
   </div>
 </div>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
@@ -81,6 +82,7 @@
         data: {
             trafficLights: [],
             darkMode: false,
+            messageHidden: false,
             moment: moment,
             cookies: Cookies,
         },
@@ -88,6 +90,10 @@
             toggleDarkMode: function () {
                 this.darkMode = !this.darkMode;
                 Cookies.set('darkMode', this.darkMode);
+            },
+            toggleMessageHidden: function () {
+                this.messageHidden = !this.messageHidden;
+                Cookies.set('messageHidden', this.messageHidden);
             },
             getData: function () {
                 axios
@@ -108,6 +114,7 @@
             this.getData();
             this.pollData();
             this.darkMode = Cookies.get('darkMode') === "true";
+            this.messageHidden = Cookies.get('messageHidden') === "true";
         },
     })
 </script>
