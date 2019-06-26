@@ -27,7 +27,7 @@
     <form>
       <div class="form-group">
         <label for="user">Name</label>
-        <input id="user" name="user" class="form-control" type="text" value="${trafficLight.user}"
+        <input id="user" name="user" class="form-control" type="text" value="${trafficLight.user?html}"
                v-bind:class="[darkMode ? 'input-dark':'']">
         <small>Your name as it will appear on your traffic light</small>
       </div>
@@ -44,7 +44,7 @@
       <div class="form-group">
         <label for="message">Message</label>
         <input id="message" name="message" class="form-control" type="text"
-               value="<#if trafficLight.message??>${trafficLight.message}</#if>"
+               value="<#if trafficLight.message??>${trafficLight.message?html}</#if>"
                v-bind:class="[darkMode ? 'input-dark':'']">
         <small>Leave more information for the rest of the team</small>
       </div>
