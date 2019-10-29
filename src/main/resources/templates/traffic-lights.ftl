@@ -32,14 +32,22 @@
                 v-bind:title="'Last updated ' + moment(trafficLight.lastUpdated).format('HH:mm DD/MM/YY')">
               {{trafficLight.user}}</h3>
           </a>
-          <div class="float-right additional-icon fas fa-home"
+          <h2 class="float-right"
                v-if="trafficLight.workingFromHome == true" data-toggle="tooltip" data-placement="bottom"
-               title="This person is working remotely" v-bind:class="[darkMode ? 'additional-icon-dark':'']"></div>
-          <div class="float-right additional-icon fas fa-times"
+               title="This person is working remotely" v-bind:class="[darkMode ? 'additional-icon-dark':'']">
+            <span class="badge badge-primary">
+              <span class="fas fa-home"></span> Remote
+            </span>
+          </h2>
+          <h2 class="float-right mr-1"
                v-if="(new Date(trafficLight.lastUpdated).setHours(0,0,0,0) < new Date().setHours(0,0,0,0)) && trafficLight.trafficLight != 'OFF'"
                data-toggle="tooltip" data-placement="bottom"
                title="This person has not updated their traffic light today"
-               v-bind:class="[darkMode ? 'additional-icon-dark':'']"></div>
+               v-bind:class="[darkMode ? 'additional-icon-dark':'']">
+            <span class="badge badge-danger">
+              <span class="fas fa-times"></span> Not updated
+            </span>
+          </h2>
         </div>
         <div class="card-body" v-if="!messageHidden" v-bind:class="[darkMode ? 'card-body-dark':'']">
           <p class="message">{{trafficLight.message}}</p>
