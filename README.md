@@ -4,10 +4,8 @@ A quick tool you can display on the screens near your desks to allow members of 
 ## Getting it running
 **For development:**
 - Create a database of your choice locally
-- Add a table "trafficlightstatus"
-- Add the columns (id, user, trafficlight, message, workingfromhome, lastupdated)
 - Add the Spring DataSource config to a local `application.properties` file in `src/main/resources`
-- Run the TrafficLightsApplication
+- Run the TrafficLightsApplication (Flyway should sort out the rest)
 
 **Building the docker image:**
 - Run the Gradle docker task
