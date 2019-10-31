@@ -67,8 +67,8 @@
     </div>
   </div>
   <div class="row float-right">
-    <button @click.stop.prevent="toggleMessageHidden" class="btn btn-light mode-toggler mr-1"><span class="fas fa-comment-dots"></span>Message Display Mode</button>
-    <button @click.stop.prevent="toggleDarkMode" class="btn btn-light mode-toggler"><span class="fas fa-adjust"></span>Dark Mode</button>
+    <button @click.stop.prevent="toggleMessageHidden" class="btn btn-light mode-toggler mr-1"><span class="fas fa-comment-dots"></span> Message Display Mode</button>
+    <button @click.stop.prevent="toggleDarkMode" class="btn btn-light mode-toggler"><span class="fas fa-adjust"></span> Dark Mode</button>
   </div>
 </div>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
