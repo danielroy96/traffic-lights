@@ -14,7 +14,7 @@
 <body>
 <div class="traffic-light-container" id="trafficLights" v-bind:class="[darkMode ? 'body-dark':'']">
   <div class="row">
-    <div class="col-sm" v-for="trafficLight in trafficLights">
+    <div class="col-sm traffic-light-card" v-for="trafficLight in trafficLights">
       <div class="card mb-4 shadow-sm" v-bind:class="[darkMode ? 'card-dark':'']">
         <div class="card-header" v-bind:class="[darkMode ? 'card-header-dark':'']">
           <a v-bind:href="'/' + trafficLight.id + '/edit'" class="user">

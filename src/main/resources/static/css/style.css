@@ -34,6 +34,10 @@
     color: gray;
 }
 
+.traffic-light-card {
+    min-width: 25%;
+}
+
 /*
     Dark mode styles
  */
