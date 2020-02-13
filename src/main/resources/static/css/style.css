@@ -35,7 +35,8 @@
 }
 
 .traffic-light-card {
-    min-width: 25%;
+    min-width: 25vh;
+    max-width: 100vh;
 }
 
 /*
