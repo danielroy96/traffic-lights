@@ -1,9 +1,3 @@
-#trafficLights {
-    min-height: 100vh;
-    min-width: 100vh;
-    padding-bottom: 5vh;
-}
-
 .traffic-light {
     width: 2rem;
     height: 2rem;
