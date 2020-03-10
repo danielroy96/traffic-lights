@@ -14,7 +14,7 @@
 <body>
 <div class="traffic-light-container" id="trafficLights" v-bind:class="[darkMode ? 'body-dark':'']">
   <div class="row">
-    <div class="col-sm-3" v-for="trafficLight in trafficLights">
+    <div class="col-sm-3 traffic-light-card" v-for="trafficLight in trafficLights">
       <div class="card mb-4 shadow-sm" v-bind:class="[darkMode ? 'card-dark':'']">
         <div class="card-header" v-bind:class="[darkMode ? 'card-header-dark':'']">
           <a v-bind:href="'/' + trafficLight.id + '/edit'" class="user">
@@ -28,25 +28,33 @@
                  v-if="trafficLight.trafficLight === 'GREEN'"></div>
             <div class="float-left border rounded-circle traffic-light"
                  v-if="trafficLight.trafficLight === 'OFF'"></div>
-            <h3 class="float-left font-weight-normal ml-md-3" data-toggle="tooltip" data-placement="bottom"
+            <h3 class="float-left font-weight-normal ml-md-3 mr-md-3" data-toggle="tooltip" data-placement="bottom"
                 v-bind:title="'Last updated ' + moment(trafficLight.lastUpdated).format('HH:mm DD/MM/YY')">
               {{trafficLight.user}}</h3>
           </a>
-          <div class="float-right additional-icon fas fa-home"
+          <h3 class="float-left ml-1"
                v-if="trafficLight.workingFromHome == true" data-toggle="tooltip" data-placement="bottom"
-               title="This person is working remotely" v-bind:class="[darkMode ? 'additional-icon-dark':'']"></div>
-          <div class="float-right additional-icon fas fa-times"
+               title="This person is working remotely" v-bind:class="[darkMode ? 'additional-icon-dark':'']">
+            <span class="badge badge-primary">
+              <span class="fas fa-home"></span> Remote
+            </span>
+          </h3>
+          <h3 class="float-left ml-1"
                v-if="(new Date(trafficLight.lastUpdated).setHours(0,0,0,0) < new Date().setHours(0,0,0,0)) && trafficLight.trafficLight != 'OFF'"
                data-toggle="tooltip" data-placement="bottom"
                title="This person has not updated their traffic light today"
-               v-bind:class="[darkMode ? 'additional-icon-dark':'']"></div>
+               v-bind:class="[darkMode ? 'additional-icon-dark':'']">
+            <span class="badge badge-danger">
+              <span class="fas fa-times"></span> Not updated
+            </span>
+          </h3>
         </div>
         <div class="card-body" v-if="!messageHidden" v-bind:class="[darkMode ? 'card-body-dark':'']">
           <p class="message">{{trafficLight.message}}</p>
         </div>
       </div>
     </div>
-    <div class="col-sm-3">
+    <div class="col-sm-3 traffic-light-card">
       <div class="card mb-4 shadow-sm" v-bind:class="[darkMode ? 'card-dark':'']">
         <a href="/create">
           <div class="card-body" v-bind:class="[darkMode ? 'card-body-dark':'']">
@@ -59,8 +67,8 @@
     </div>
   </div>
   <div class="row float-right">
-    <button @click.stop.prevent="toggleMessageHidden" class="far fa-comment-dots btn mode-toggler"></button>
-    <button @click.stop.prevent="toggleDarkMode" class="fas fa-adjust btn mode-toggler"></button>
+    <button @click.stop.prevent="toggleMessageHidden" class="btn btn-light mode-toggler mr-1"><span class="fas fa-comment-dots"></span> Message Display Mode</button>
+    <button @click.stop.prevent="toggleDarkMode" class="btn btn-light mode-toggler"><span class="fas fa-adjust"></span> Dark Mode</button>
   </div>
 </div>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"

@@ -43,7 +43,7 @@ task unpack(type: Copy) {
 }
 
 docker {
-	name "${project.group}/${bootJar.baseName}"
+	name "quay.io/fivium/traffic-lights"
 	copySpec.from(tasks.unpack.outputs).into("dependency")
 	buildArgs(['DEPENDENCY': "dependency"])
 }
