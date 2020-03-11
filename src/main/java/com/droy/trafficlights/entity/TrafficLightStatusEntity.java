@@ -26,6 +26,9 @@ public class TrafficLightStatusEntity {
     @Column(name = "workingfromhome")
     private boolean workingFromHome;
 
+    @Column(name = "awayfromkeyboard")
+    private boolean awayFromKeyboard;
+
     @Column(name = "lastupdated")
     private Date lastUpdated;
 
@@ -33,11 +36,13 @@ public class TrafficLightStatusEntity {
                                     TrafficLight trafficLight,
                                     String message,
                                     boolean workingFromHome,
+                                    boolean awayFromKeyboard,
                                     Date lastUpdated) {
         this.user = user;
         this.trafficLight = trafficLight;
         this.message = message;
         this.workingFromHome = workingFromHome;
+        this.awayFromKeyboard = awayFromKeyboard;
         this.lastUpdated = lastUpdated;
     }
 
@@ -64,6 +69,8 @@ public class TrafficLightStatusEntity {
         return workingFromHome;
     }
 
+    public boolean isAwayFromKeyboard() { return awayFromKeyboard; }
+
     public void setId(int id) {
         this.id = id;
     }
@@ -87,6 +94,8 @@ public class TrafficLightStatusEntity {
     public void setWorkingFromHome(boolean workingFromHome) {
         this.workingFromHome = workingFromHome;
     }
+
+    public void setAwayFromKeyboard(boolean awayFromKeyboard) { this.awayFromKeyboard = awayFromKeyboard; }
 
     public void setLastUpdated(Date lastUpdated) {
         this.lastUpdated = lastUpdated;
