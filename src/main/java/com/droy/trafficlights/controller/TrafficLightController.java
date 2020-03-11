@@ -43,17 +43,23 @@ public class TrafficLightController {
                                              @ModelAttribute("trafficLight") String trafficLight,
                                              @ModelAttribute("message") String message,
                                              @ModelAttribute("workingFromHome") String workingFromHome,
+                                             @ModelAttribute("awayFromKeyboard") String awayFromKeyboard,
                                              Model model) {
         boolean workingFromHomeBoolean = false;
         if (workingFromHome.equals("on")) {
             workingFromHomeBoolean = true;
+        }
+        boolean awayFromKeyboardBoolean = false;
+        if (awayFromKeyboard.equals("on")) {
+            awayFromKeyboardBoolean = true;
         }
         trafficLightService.updatetrafficLight(
                 id,
                 user,
                 TrafficLight.valueOf(trafficLight),
                 message,
-                workingFromHomeBoolean
+                workingFromHomeBoolean,
+                awayFromKeyboardBoolean
         );
         model.addAttribute("trafficLights", trafficLightService.getTrafficLights());
         return new RedirectView("/");
@@ -72,6 +78,7 @@ public class TrafficLightController {
                 TrafficLight.GREEN,
                 "",
                 false,
+                false,
                 new Date()));
         return "edit-traffic-light";
     }
@@ -81,16 +88,22 @@ public class TrafficLightController {
                                                @ModelAttribute("trafficLight") String trafficLight,
                                                @ModelAttribute("message") String message,
                                                @ModelAttribute("workingFromHome") String workingFromHome,
+                                               @ModelAttribute("awayFromKeyboard") String awayFromKeyboard,
                                                Model model) {
         boolean workingFromHomeBoolean = false;
         if (workingFromHome.equals("on")) {
             workingFromHomeBoolean = true;
         }
+        boolean awayFromKeyboardBoolean = false;
+        if (awayFromKeyboard.equals("on")) {
+            awayFromKeyboardBoolean = true;
+        }
         trafficLightService.createTrafficLight(
                 user,
                 TrafficLight.valueOf(trafficLight),
                 message,
-                workingFromHomeBoolean
+                workingFromHomeBoolean,
+                awayFromKeyboardBoolean
         );
         return new RedirectView("/");
     }

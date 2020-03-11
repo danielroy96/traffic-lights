@@ -31,13 +31,15 @@ public class TrafficLightService {
                                    String user,
                                    TrafficLight trafficLight,
                                    String message,
-                                   boolean workingFromHome
+                                   boolean workingFromHome,
+                                   boolean awayFromKeyboard
                                    ) {
         TrafficLightStatusEntity trafficLightStatusEntity = trafficLightStatusRepository.getById(id);
         trafficLightStatusEntity.setUser(user);
         trafficLightStatusEntity.setTrafficLight(trafficLight);
         trafficLightStatusEntity.setMessage(message);
         trafficLightStatusEntity.setWorkingFromHome(workingFromHome);
+        trafficLightStatusEntity.setAwayFromKeyboard(awayFromKeyboard);
         trafficLightStatusEntity.setLastUpdated(new Date());
         trafficLightStatusRepository.save(trafficLightStatusEntity);
     }
@@ -50,12 +52,14 @@ public class TrafficLightService {
     public void createTrafficLight(String user,
                                    TrafficLight trafficLight,
                                    String message,
-                                   boolean workingFromHome) {
+                                   boolean workingFromHome,
+                                   boolean awayFromKeyboard) {
         TrafficLightStatusEntity trafficLightStatusEntity = new TrafficLightStatusEntity(
                 user,
                 trafficLight,
                 message,
                 workingFromHome,
+                awayFromKeyboard,
                 new Date()
         );
         trafficLightStatusRepository.save(trafficLightStatusEntity);
