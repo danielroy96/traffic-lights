@@ -55,6 +55,11 @@
                  <#if trafficLight.workingFromHome>checked</#if> v-bind:class="[darkMode ? 'input-dark':'']">
           <label for="workingFromHome" class="form-check-label">I'm working from home</label>
         </div>
+        <div class="form-check">
+          <input id="awayFromKeyboard" name="awayFromKeyboard" class="form-check-input" type="checkbox"
+                 <#if trafficLight.awayFromKeyboard>checked</#if> v-bind:class="[darkMode ? 'input-dark':'']">
+          <label for="awayFromKeyboard" class="form-check-label">I am away from my keyboard</label>
+        </div>
       </div>
       <div class="form-group">
           <#if (trafficLight.id > 0)>
