@@ -11,6 +11,8 @@ public interface TrafficLightStatusRepository extends CrudRepository<TrafficLigh
 
     public List<TrafficLightStatusEntity> getAllByIdGreaterThanOrderByLastUpdatedDesc(int i);
 
+    public List<TrafficLightStatusEntity> getAllByIdGreaterThanOrderByUser(int i);
+
     public TrafficLightStatusEntity getById(int i);
 
 }

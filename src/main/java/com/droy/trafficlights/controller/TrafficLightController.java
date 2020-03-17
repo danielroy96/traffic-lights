@@ -2,6 +2,7 @@ package com.droy.trafficlights.controller;
 
 import com.droy.trafficlights.entity.TrafficLightStatusEntity;
 import com.droy.trafficlights.enumeration.TrafficLight;
+import com.droy.trafficlights.enumeration.TrafficLightOrdering;
 import com.droy.trafficlights.service.TrafficLightService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -26,7 +27,7 @@ public class TrafficLightController {
 
     @GetMapping({"/", "/view"})
     public String trafficLightView(Model model) {
-        model.addAttribute("trafficLights", trafficLightService.getTrafficLights());
+        model.addAttribute("trafficLights", trafficLightService.getTrafficLights(TrafficLightOrdering.UPDATED));
         return "traffic-lights";
     }
 
@@ -61,7 +62,7 @@ public class TrafficLightController {
                 workingFromHomeBoolean,
                 awayFromKeyboardBoolean
         );
-        model.addAttribute("trafficLights", trafficLightService.getTrafficLights());
+        model.addAttribute("trafficLights", trafficLightService.getTrafficLights(TrafficLightOrdering.UPDATED));
         return new RedirectView("/");
     }
 

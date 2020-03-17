@@ -43,9 +43,10 @@
       </div>
       <div class="form-group">
         <label for="message">Message</label>
-        <input id="message" name="message" class="form-control" type="text"
-               value="<#if trafficLight.message??>${trafficLight.message?html}</#if>"
-               v-bind:class="[darkMode ? 'input-dark':'']">
+        <textarea id="message" name="message" class="form-control"
+                  v-bind:class="[darkMode ? 'input-dark':'']"
+                  rows="4"
+        ><#if trafficLight.message??>${trafficLight.message?html}</#if></textarea>
         <small>Leave more information for the rest of the team</small>
       </div>
       <div class="form-group">

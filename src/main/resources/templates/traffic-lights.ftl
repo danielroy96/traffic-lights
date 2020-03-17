@@ -57,7 +57,7 @@
           </h3>
         </div>
         <div class="card-body" v-if="!messageHidden" v-bind:class="[darkMode ? 'card-body-dark':'']">
-          <p class="message">{{trafficLight.message}}</p>
+          <p class="message" style="white-space: pre-wrap;">{{trafficLight.message}}</p>
         </div>
       </div>
     </div>
@@ -74,6 +74,16 @@
     </div>
   </div>
   <div class="row float-right">
+    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+      <label class="btn btn-light mode-toggler" v-bind:class="{ active: sortBy == 'ALPHA' }" @click="setSortBy('ALPHA')">
+        <input type="radio" name="sort" id="sort-alpha" autocomplete="off" :active="sortBy == 'alpha'">
+        <span class="fas fa-sort-alpha-up"></span> Alpha
+      </label>
+      <label class="btn btn-light mode-toggler" v-bind:class="{ active: sortBy == 'UPDATED' }" @click="setSortBy('UPDATED')">
+        <input type="radio" name="sort" id="sort-updated" autocomplete="off" :active="sortBy == 'updated'">
+        <span class="fas fa-clock"></span> Updated
+      </label>
+    </div>
     <button @click.stop.prevent="toggleMessageHidden" class="btn btn-light mode-toggler mr-1"><span class="fas fa-comment-dots"></span> Message Display Mode</button>
     <button @click.stop.prevent="toggleDarkMode" class="btn btn-light mode-toggler"><span class="fas fa-adjust"></span> Dark Mode</button>
   </div>
@@ -100,6 +110,7 @@
             messageHidden: false,
             moment: moment,
             cookies: Cookies,
+            sortBy: 'UPDATED',
         },
         methods: {
             toggleDarkMode: function () {
@@ -110,9 +121,18 @@
                 this.messageHidden = !this.messageHidden;
                 Cookies.set('messageHidden', this.messageHidden);
             },
+            setSortBy: function (sortBy) {
+                this.sortBy = sortBy;
+                Cookies.set('sortBy', this.sortBy);
+                this.getData();
+            },
             getData: function () {
+                var url = '/rest/traffic-lights';
+                if (this.sortBy != null) {
+                  url = url + '?order=' + this.sortBy;
+                }
                 axios
-                    .get('/rest/traffic-lights')
+                    .get(url)
                     .then(response => (this.trafficLights = response.data));
                 $('[data-toggle="tooltip"]').tooltip();
             },
@@ -126,10 +146,14 @@
             clearInterval(this.polling)
         },
         mounted() {
+            if (Cookies.get('sortBy') != null) {
+              this.sortBy = Cookies.get('sortBy');
+            };
             this.getData();
             this.pollData();
             this.darkMode = Cookies.get('darkMode') === "true";
             this.messageHidden = Cookies.get('messageHidden') === "true";
+
         },
     })
 </script>
