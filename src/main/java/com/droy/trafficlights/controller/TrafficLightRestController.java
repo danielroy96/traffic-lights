@@ -1,10 +1,12 @@
 package com.droy.trafficlights.controller;
 
 import com.droy.trafficlights.entity.TrafficLightStatusEntity;
+import com.droy.trafficlights.enumeration.TrafficLightOrdering;
 import com.droy.trafficlights.service.TrafficLightService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -18,8 +20,8 @@ public class TrafficLightRestController {
   }
 
   @RequestMapping("/rest/traffic-lights")
-  public List<TrafficLightStatusEntity> getTrafficLights() {
-    return trafficLightService.getTrafficLights();
+  public List<TrafficLightStatusEntity> getTrafficLights(@RequestParam(required = false) TrafficLightOrdering order) {
+    return trafficLightService.getTrafficLights(order);
   }
 
 }

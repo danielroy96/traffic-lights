@@ -2,10 +2,12 @@ package com.droy.trafficlights.service;
 
 import com.droy.trafficlights.entity.TrafficLightStatusEntity;
 import com.droy.trafficlights.enumeration.TrafficLight;
+import com.droy.trafficlights.enumeration.TrafficLightOrdering;
 import com.droy.trafficlights.repository.TrafficLightStatusRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -19,7 +21,10 @@ public class TrafficLightService {
         this.trafficLightStatusRepository = trafficLightStatusRepository;
     }
 
-    public List<TrafficLightStatusEntity> getTrafficLights() {
+    public List<TrafficLightStatusEntity> getTrafficLights(TrafficLightOrdering order) {
+        if (order == TrafficLightOrdering.ALPHA) {
+            return trafficLightStatusRepository.getAllByIdGreaterThanOrderByUser(0);
+        }
         return trafficLightStatusRepository.getAllByIdGreaterThanOrderByLastUpdatedDesc(0);
     }
 
