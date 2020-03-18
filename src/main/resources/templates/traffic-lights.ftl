@@ -74,7 +74,7 @@
     </div>
   </div>
   <div class="row float-right">
-    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+    <div class="btn-group btn-group-toggle mr-1" data-toggle="buttons">
       <label class="btn btn-light mode-toggler" v-bind:class="{ active: sortBy == 'ALPHA' }" @click="setSortBy('ALPHA')">
         <input type="radio" name="sort" id="sort-alpha" autocomplete="off" :active="sortBy == 'alpha'">
         <span class="fas fa-sort-alpha-up"></span> Alpha
